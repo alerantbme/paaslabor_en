@@ -1,79 +1,82 @@
-# Tudnivalók
+# Knowledge
 
-## VirtualBox importálás
+## VirtualBox Import
 
-Otthoni munkához, a gyakorlatok befejezéséhez a virtuális gép letölthető innen (BME hálóról): curl -L0 http://ossrv1.aut.bme.hu/alerantbme_paaslabor_student_2019.ova
+For home work, to complete the exercises, the virtual machine can be downloaded here (from BME network): 
+curl -L0 http://ossrv1.aut.bme.hu/alerantbme_paaslabor_student_2019.ova
 
-Labor során a desktop gépen is megvan itt: C:\VPCImages\PAAS\alerantbme_paaslabor_student_2019.ova
+You also have it on the desktop at C:\VPCImages\PAAS\alerantbme_paaslabor_student_2019.ova
 
-### Korábbi virtuális gép törlése
-Óvatosan, nehogy más virtuális gépét töröljétek ki!
+### Delete previous virtual machine
+Carefully, avoid erasing other virtual machines!
 
-1. A workstation-n VirtualBox-ban a AlerantBME_CentOS7-et kiválasztva Delete/Törlés, Delete All files választása
-2. Ellenőrizd a VirtualBox->File->Virtual Media Manager pontban, hogy nem létezik a AlerantBME_CentOS7-es disk, ha ott van, akkor töröld.
+1. At the workstation , open VirtualBox, select AlerantBME_CentOS7: Delete , Delete all 
+2. In VirtualBox-> File-> Virtual Media Manager, check that the AlerantBME_CentOS7 disk does not exist, if it is there, delete it.
 
-### Virtuális gép importálása
-1. Hozd létre a C:\Work\VirtualBox könyvtárat (ha ott van már és nincs másnak a virtuális gépe benne, akkor törölj belőle mindent)
-2. VirtualBox-ban:
-- Ellenőrizd: File->Preferences->General->Default Machince (Fájl->Beállítások->Általános->Alapértelmezett gép mappa) folder beállítása: C:\Work\VirtualBox
+### Importing a virtual machine
+1. Create the C:\Work\VirtualBox directory (if there is, but there is no others virtual machine in it, delete it all)
+2. In VirtualBox:
+- Check File-> Preferences-> General-> Default Machine (File-> Preferences-> General-> Default Machine Folder) Folder: C:\Work\VirtualBox
 - Import Appliance: C:\VPCImages\PAAS\alerantbme_paaslabor_student_2019.ova
-- Ellenőrizd a wizard utolsó lépésénél, hogy jó útvonal került-e be
+- At the last step of the wizard, check if a good path has been entered
 
-## VirtualBox CentOS információk
-- VirtualBox-ban indítsd el a CentOS image-et és ebben dolgozz végig!
-- CentOS Login: **BME Paas user / jelszó: paaslabor**
-- sudo használható (óvatosan azért :))
-- ha szükséged van esetleg a Linuxon valami package-re: sudo yum install -y XXXXXXXX
-- host gép könyvtárának mountolása: 
-1. hozz létre a VirtualBox-ban Devices/Shared Folders (Eszközök/Megosztott mappák) -ban egy foldert (géphez tartozó megosztások alá) pl. host néven, 
-2. majd a CentOS-ben ezt mountolhatod: sudo mount -t vboxsf host /media  (host a share neve)
-- Firefox a böngésző
-- érdemes beállítani VirtualBox-ban a bidirectional clipboard-ot hogy a copy-paste működjön
-- service-ek statusa, újraindítása pl.: sudo systemctl restart NetworkManager
-- készítsetek magatoknak egy munkakönyvtárat és abban dolgozzatok
+## VirtualBox CentOS Information
+- Start the CentOS image in VirtualBox and work on it!
+- CentOS Login: ** BME Paas user,password: paaslabor **
+- sudo can be used (carefully :))
+- if you need some package on Linux: sudo yum install -y XXXXXXXX
+- mount host host directory:
+    1. Create a folder in Devices / Shared Folders in VirtualBox. Name it "host".
+    2. Then you can mount it in CentOS: sudo mount -t vboxsf host /media ("host" is the share name)
+- Firefox is the browser
+- You should set the bidirectional clipboard in VirtualBox to make copy-paste work
+- status and restart of services such as sudo systemctl restart NetworkManager
+- Make a working directory for yourself and work on it
 
 ## GitHub
 
-Mindenkinek készítenie kell egy GitHub-os account-ot, vagy a meglévőt használjátok!
+Everyone must create a GitHub account or use an existing one!
 
 1. https://github.com/
 2. Sign Up
-3. username pl. alerantbmexy, stb...., meg kell erősíteni a regisztrációt emailben kapott linken
-4. GitHub-on start project-tel lehet új projektet létrehozni, pl. gyakorlat2
+3. username example: alerantbmexy, etc..., you need to confirm your registration via email
+4. Create a new project with GitHub start project, e.g. practice2
 
-A CentOS image-ben a ~/git könyvtárban tudtok dolgozni (több projekt is lesz)
+You can work in the ~/git directory in the CentOS image (there will be more projects)
 
-Git fontos parancsok:
-```shell
+Git Important Commands:
+``Shell
 echo "# gyakorlat2" >> README.md
 git init
 git add README.md
 git commit -m "first commit"
-git remote add origin https://github.com/alerantbmexy/gyakorlat2.git
+git remote add origin https://github.com/alerantbmexy/practice2.git
 git push -u origin master
 ```
 
-Gyakorlatokban így klónozz le példákat:
-```shell
-# példa Java OpenShift Wildfly alkalmazás klónozása
-git clone https://github.com/bparees/openshift-jee-sample gyakorlat2
-git pull https://github.com/bparees/openshift-jee-sample gyakorlat2
+Here's how to clone examples in practice:
+``Shell
+Example # Cloning Java OpenShift Wildfly Application
+git clone https://github.com/bparees/openshift-jee-sample practice2
+git pull https://github.com/bparees/openshift-jee-sample practice2
 
-# ne az eredeti helyre tegyük vissza, hanem a saját userünk alá
-git remote set-url origin https://github.com/alerantbmenz/gyakorlat2.git
+# Do not place it back in the original location, but under your own user
+git remote set-url origin https://github.com/alerantbmenz/practice2.git
 
-# módosítások
+# modifications
 git commit -a -m 'Some commit message'
-# feltöltjük az új helyre a saját accountunk alá
+# upload to the new location under our own account
 git push origin master
 ```
-Ekkor a saját GitHub URL alapján már lehet saját kódbázison új proktet létrehozni.
+You can now create a new project on your own code base based on your own GitHub URL.
 
-Ilyen a könyvtárstruktúra:
-```shell
-[bmepaasuser@localhost ~]$ tree git/
+Such is the directory structure:
+
+``Shell
+
+[bmepaasuser @ localhost ~] $ tree git /
 git/
-└── gyakorlat2
+└── practice2
     ├── pom.xml
     ├── README.md
     └── src
@@ -82,58 +85,58 @@ git/
             ├── resources
             └── webapp
                 ├── images
-                │   └── jbosscorp_logo.png
+                │ └── jbosscorp_logo.png
                 ├── index.html
                 └── snoop.jsp
 
 ```
 
 
-## DNS és hosts fájl
-- Az openshift-es alkalmazások core komponensek alapvetően IP-vel érhetőek el, de az /etc/hosts fájlban fel vannak véve a FQDN-ek
-- A gépeken dnsmasqd is telepítve van, amely segítségével működik a wildcard DNS is, tehát pl. az XXX.apps.openshift.local is feloldódik a megfelelő IP-re
+## DNS and hosts file
+- Openhift application core components are basically available with IP, but FQDNs are included in the /etc/hosts file
+- Dnsmasqd is also installed on the machines, which also works with wildcard DNA, eg. XXX.apps.openshift.local also resolves to the correct IP
 
-dnsmasq config fájl: /etc/NetworkManager/dnsmasq.d
+dnsmasq config file: /etc/NetworkManager/dnsmasq.d
 
-## IP-k
-```shell
-192.168.30.11	bmepaas-master.openshift.local
-192.168.30.12	bmepaas-node1.openshift.local
-192.168.30.13	bmepaas-node2.openshift.local
+## IPs
+``Shell
+192.168.30.11 bmepaas-master.openshift.local
+192.168.30.12 bmepaas-node1.openshift.local
+192.168.30.13 bmepaas-node2.openshift.local
 ```
 
 
-## Elérések
+## References
 
-## Docker témához
-- Vannak már Docker image-ek a lokális gépen, azt próbáljátok használni elsősorban és ne újakat töltsetek le!
+## Docker 
+- There are Docker images on the local machine, use them and do not download new ones!
 
-## OpenShift témához
-- Központi OpenShift dashboard: https://bmepaas-master.openshift.local:8443
-- Lokális OpenShift elindítása: sudo systemctl start openshift
+## OpenShift 
+- Central OpenShift dashboard: https://bmepas-master.openshift.local:8443
+- Starting local OpenShift: sudo systemctl start openshift
 
-## Jegyzőkönyv
+## Solution Document
 
-**A jegyzőkönyvhöz menet közben gyűjtsd az anyagokat (külön jelölve van, hogy mikor mit), hogy a kitöltésnél már minden infó meglegyen.**
+** Collect materials for the report continuously, when, what you do, to have all the information at the time of filling. **
 
-# Otthon hogyan próbálhatom ki?
-Linuxon egyszerűbb, de nem kizárólagos platform!
-## Virtuális gép
-A gyakorlaton használt virtuális gépet is elvihetitek!
+# How can I try out at home?
+On Linux is a simpler, but other platforms also work!
+## Virtual Machine
+You can also take with you the virtual machine that is used in practice!
 ## Docker
-- Telepítsd fel és játsz vele (Linuxokra a csomagkezelőn keresztül vagy [innen](https://store.docker.com/search?offering=community&type=edition) mindenféle platformra) 
-- Vagy játsz vele [online](http://training.play-with-docker.com/)!
+- Install and play with it, on Linux via the package manager or [from](https://store.docker.com/search?offering=community&type=edition) 
+- Or play with [online](http://training.play-with-docker.com/)!
 ## Kubernetes
-- Natív Kubernetes telepítés Linuxon
-- [Minikube](https://github.com/kubernetes/minikube)
+- Native Kubernetes installation on Linux
+- [Minicube](https://github.com/kubernetes/minikube)
 ## Openshift
-- oc cluster up [itt](https://www.okd.io/)
+- oc cluster up [here](https://www.okd.io/)
 - [Minishift](https://github.com/minishift/minishift)
-## Openshift tanfolyam
+## Openshift course
 - https://learn.openshift.com
 
-## Hasznos linkek, blogok
+## Useful links, blogs
 - https://github.com/veggiemonk/awesome-docker
-- http://www.opensourcerers.org/tag/openshift/ 
+- http://www.opensourcerers.org/tag/openshift/
 - http://training.play-with-docker.com/
 - https://learn.openshift.com
