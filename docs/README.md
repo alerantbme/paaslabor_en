@@ -1,36 +1,35 @@
 ![alerantlogo](https://www.alerant.hu/img/logo.svg) 
-# BME PaaS labor segédlet
-## Tudnivalók
-**Labor email elérhetőség:** alerant.bme.paas.labor@gmail.com
+# BME PaaS labor help
+## Earn more
+**Labor email contact:** alerant.bme.paas.labor@gmail.com
 
 ---
-# Célkitűzés, tematika
-A labor célja a következő témák áttekintése:
-- **Alapműveletek konténerben futtatott alkalmazásokkal**
-  - Docker konténer létrehozása dockerfile vagy Docker Hub image alapján,
-  - Docker registry használata,  
-  - a hoszt és a konténer kapcsolódásának vizsgálata (folyamat-azonosítók, portok, névterek), 
-  - parancsok futtatása a konténerben,
-  - webszerver futtatása, elérése, módosítása.
-- **OpenShift**
-  - konténer orchestration, 
-  - deployment folyamatok,
-  - OpenShift architektúra áttekintése ,
-  - OpenShift alapfogalmak áttekintése(Service, Pod, Route).
-
+# Objective, theme
+The aim of the lab is to review the following topics:
+- ** Basic Operations with Applications Running in Containers **
+  - Create a Docker Container based on dockerfile or Docker Hub image
+  - Using Docker Registry
+  - examining the connection between the host and the container (process IDs, ports, namespaces),
+  - run commands in the container
+  - running, accessing, and modifying a web server.
+- ** OpenShift **
+  - container orchestration,
+  - deployment processes,
+  - Overview of OpenShift architecture
+  - Overview of OpenShift concepts (Service, Pod, Route).
 ---
 
-# Elméleti áttekintés
+# Theoretical overview
 ## IaaS, PaaS, SaaS
-[IaaS, PaaS, SaaS áttekintés](Elmelet1.md)
+[IaaS, PaaS, SaaS overview](Elmelet1.md)
 
 ## Docker
 [Docker](Elmelet2.md)
 
-## OpenShift áttekintés
+## OpenShift overview
 [OpenShift](Elmelet3.md)
 
-# Hasznos linkek
+# Useful links
 [Links] (Linkek.md)
 
 ---
