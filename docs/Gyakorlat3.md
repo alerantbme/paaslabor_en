@@ -68,7 +68,7 @@ oc patch dc myapp -p '{"spec":{"strategy":{"type":"Recreate"}}}'
 The aim of the exercise is to try out different deployment strategies.
 
 **Blue/Green deployment**
-![XaaS](../common/images/abdeployment.png)
+![XaaS](https://github.com/alerantbme/paaslabor/blob/labor/common/images/abdeployment.png)
 The entire application stack is installed in duplicate and a command to decide which end users are to reach
 ```shell
 
