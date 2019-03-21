@@ -1,182 +1,188 @@
-# OpenShift áttekintés
-A Docker konténerek önmagukban még nem alkalmasak arra, hogy egy teljes PaaS megoldást nyújtsanak.
 
-A következő problémákra kell _még_ megoldás:
-- A különböző konténerek összekapcsolása, management-je fapados, ha csak a Docker-re építkezünk. (Scheduling)
-- Nincs megoldva a skálázás(akár dinamikusan), failover, high-availability. (Scaling)
-- Alkalmazás buildelési, deployálási folyamatok támogatása.
-- Tenant/Project izoláció (egy PaaS megoldásban nem láthatják egymás erőforrásait/projektjeit/alkalmazásait)
 
-Ezekre a problémákra vannak létező megoldások, technológiák:
-- Kubernetes, Docker Compose, Docker Swarm - konténer menedzsment (Scheduling + Scaling)
-- Alkalmazásfejlesztési módszertanok, eszközök: Git vagy más SCM, Jenkins,...
-- Hálózati eszközök: Open vSwitch, Linux kernel technológiák
-- Monitorozás: Hawkular
+# OpenShift Overview
+Docker containers alone are not yet capable of providing a complete PaaS solution.
 
-Az OpenShift az előbbi problémákra megoldást nyújt, ráépülve a Docker konténer technológiára és más bevált eszközökre elsősorban a Kubernetes-re.
+The following issues need to be solved:
+- Connecting and managing different containers is limited if we only build only on Docker. (Scheduling)
+- No scaling (either dynamically), failover, high-availability. (Scaling)
+- Support application building, deployment processes.
+- Tenant / Project Isolation (in a PaaS solution resources / projects / applications separated completely)
+
+There are existing solutions and technologies for these problems:
+- Kubernetes, Docker Compose, Docker Swarm - Container Management (Scheduling + Scaling)
+- Application development methodologies, tools: Git or other SCM, Jenkins, ...
+- Networking tools: Open vSwitch, Linux kernel technologies
+- Monitoring: Hawkular
+
+OpenShift solves these problems by building on Docker container technology and other proven tools, primarily for Kubernetes.
 
 # OpenShift OKD
-OKD = The Origin Community Distribution of Kubernetes 
-- azaz egy Kubernetes disztribúció, amely optimalizált a CI/CD folyamatokra és a multi-tenant működésre
-- korábban Origin (3.10 előtt), most már deklaráltan Kubernetes disztribúció
-- korábban is a legnagyobb kollaborátor projekt, számos Kubernetes feature forrása, pl. Role Based Access Control(RBAC)
+OKD = The Origin Community Distribution of Kubernetes
+- a Kubernetes distribution optimized for CI / CD processes and multi-tenant operation
+- Origin (before 3.10), now Kubernetes distribution
+- formerly the largest contributor project, the source of many Kubernetes features, e.g. Role Based Access Control (RBAC)
 
-[OpenShift történelem](https://blog.openshift.com/openshift-kubernetes-where-weve-been-and-where-were-going-part-1/)
+[OpenShift history](https://blog.openshift.com/openshift-kubernetes-where-weve-been-and-where-were-going-part-1/)
 
-[OpenShift jövő](https://blog.openshift.com/openshift-kubernetes-where-weve-been-and-where-were-going-part-2/)
+[OpenShift Future](https://blog.openshift.com/openshift-kubernetes-where-weve-been-and-where-were-going-part-2/)
 
-# Alapfogalmak
-- **Project**: adminisztratív izoláció, az egyes szállítók külön-külön egymástól izolálva dolgozhatnak egy-egy projekten. A Node-ot kivéve minden OpenShift entitás/resource Project scopeú.
-- **User**: az OpenShift felhasználói, akik tevékenysége jogosultságkezeléssel korlátozható
-- **Container, Image, Registry**: Az OpenShift a Docker-t használja konténer technológiaként ezért ezek pontosan a Docker foglamak.
-- **Pod**: Egy vagy több konténer, közös tárterülettel, hálózattal. Telepítési, management egység.
-- **Node**: Podokat futtató gép.
-- **Service**: Egy belső hálózati portot reprezentál, amin -abstrakt módon- elérhetőek a mögé bekötött POD-ok ill. azok szolgáltatásai. Belső terhelés elosztóként működnek. 
-- **Build, BuildConfig**: Egy alkalmazás forráskódjából Docker image készül. Ez a folyamat a Build és ennek a paraméterezése a BuildConfig.
-Az OpenShift alapegységei YAML ill. JSON formátumban is leírhatók. 
 
-# OpenShift Architektúra
+# Basic concepts
+-**Project**: Administrative isolation, individual vendors can work separately on each project. Except for Node, all OpenShift entities are project resources.
+- **User**: users of OpenShift whose activity may be restricted by authorization
+- **Container, Image, Registry**: OpenShift uses Docker as container technology, so they are exactly the Docker definitions.
+- **Pod**: One or more containers with shared storage space, network. Installation, management unit.
+- **Node**: Machine running pods.
+- **Service**: Represents an internal network port that - in an abstract way - is accessed by the PODs behind and their services. Internal load balancers also.
+- **Build, BuildConfig**: Docker image is created from the source code of an application. This process named Build and its parameter is BuildConfig.
+The basic components of OpenShift can be described in YAML or they can also be described in JSON format.
+
+# OpenShift Architecture
 ![openshift_arch](../common/images/openshift_arch2.png)
 ![openshift_arch4](../common/images/openshift_arch4.png)
 
-# Alkalmazásfejlesztés
+# Application Development
 ![s2i_2](../common/images/s2i_2.png)
 
-## Build folyamat
+## Build Process
 https://docs.openshift.org/latest/dev_guide/application_lifecycle/new_app.html
 
-A következő módon lehet az OpenShift-en alkalmazásokat buildelni:
+Here's how to build applications on OpenShift:
 
-1. Docker: ez gyakorlatilag a Dockerfile alapú buildelési folyamat
-2. S2I -Source to Image: a forráskód és egy Builder docker image alapján lefordítja, összeállítja a végterméket (itt is egy Docker image-et)
-3. Custom build - Teljesen customizált build folyamat, saját Builder image-el.
+1. Docker: This is practically the Dockerfile based build process
+2. S2I -Source to Image: compile the final product based on the source code and a Builder docker image (here also a Docker image)
+3. Custom build - A fully customized build process with your own Builder image.
 4. Jenkins Pipeline build
 
-A Buildeléshez is Docker containerek jönnek létre! Pl. a megadott forrást egy Java+Maven+Nexus -al konfigurált build container fordítja le.
+The Docker containers are also created for Build! For example, the specified source is compiled by a build container configured with Java + Maven + Nexus.
 
 **BuildConfig**
 
-A buildelés konfigurációja, többek között leírja, hogy hol a forrás, mi a fordítás eredménye, milyen "stratégia" szerint fordítson, mi triggerelje a fordítást stb.
+The configuration of the build, among other things, describes where the source is, what the result of the compilation, what "strategy" to compile, what trigger the compilation, etc.
 
-**ImageStream**
+**Image Stream**
 
-A fordítás eredménye egy Docker Image. Az egymást követő buildek láncolata egy ImageStream.
-Egy ilyen ImageStream egy nézetet biztosít egy vagy több Docker image-re a címkéken keresztül (pl. cimke a webszerveren, db-n,stb.)
+The result of the translation is a Docker Image. The chain of consecutive builds is ImageStream.
+Such ImageStream provides a view of one or more Docker images through the tags (eg labels on the web server, on the db, etc.)
 
-### Forrás konvenciók
-A build folyamatokhoz a forrásainknak a nyelvi ill. technológiai standardeket követni kell, pl. Java buildeléshez kell lenni egy pom.xml-nek - Maven build.
-Ezen kívül a buildelési folyamat customizálható több ponton:
+### Source Conventions
+Sources needs to follow language and technology standards, eg You need  a pom.xml for Java build - Maven build.
+In addition, the build process can be customized at several points:
 
-1. Assemble script - az eredménytermék összecsomagolását lehet vele customizálni (pl. zipek, tarok, war-ok, stb.)
-2. Run script - Hogyan kell majd futtatni az előállt eredményterméket.
-3. Save-Artifacts - A build során használt csomagok, libek elmenthetők, hogy ne kelljen minden buildnél az összes - nem változott- függőséget letölteni.
+1. Assemble script - customize the packaging of the result product (eg zips, tars, wares, etc.)
+2. Run script - How to run the generated result product.
+3. Save-Artifacts - You can save packages that are used during the build, so that you do not need to download all - unchanged dependencies for each build.
 
-## Telepítési folyamat
+## Legfontosabb CLI parancsok
 
+## Installation process
 ![appflow1](../common/images/deploy_flow1.png)
 ![appflow](../common/images/deploy_flow.png)
 
 **DeploymentConfig**
 
-Leírja a telepítési folyamat részleteit.
+Describes the details of the installation process.
 
 
-# OpenShift adminisztráció
-1. OpenShift dashboard GUI felület: https://127.0.0.1:8443 (oc cluster up után)
-2. oc CLI kliens
+# OpenShift Administration
+1. OpenShift dashboard GUI interface: https://127.0.0.1:8443 (after oc cluster up)
+2. oc CLI client
 
-## Authentikáció és Authorizáció
-Jelenleg password nélkül be lehet lépni az előírt felhasználónevekkel.
-A CLI OAuth tokennel is használható.
+## Authentication and Authorization
+You can now enter the required user names without a password.
+The CLI can also be used with OAuth tokens.
 
 
-## Legfontosabb CLI parancsok
+## Key CLI commands
 ```shell
 oc help
 oc CMD --help
-oc types            --OpenShift alap entitások leírása
-oc login            --belépés
-oc new-app          --új alkalmazás létrehozása
-#stb. lsd. gyakorlati anyagokban
+oc types            --OpenShift basic entities
+oc login            --login
+oc new-app          --new app creation
 ```
 
-# OpenShift skálázási lehetőségek
+
+# OpenShift Scaling Options
 ![scaling](../common/images/openshift_arch3.png)
-## Replication Controller-ek
-Felelősek, hogy mindig a meghatározott számú Pod fusson. Pl. ha leáll egy, akkor indít újat, stb.
-Nem felelős azért, hogy mennyi is ez a Pod szám. Nem figyel forgalmat, terhelést, nem kalkulálja ki ezt a számot, csak végrehajt.
-Runtime is állítható, de redeployment esetén csak akkor lesz érvényes, ha DC szinten állítottuk be.
+## Replication Controllers
+Responsible to always run the specified number of Pods. For example, if one stops, it will launch a new one, etc.
+Not responsible for how much amount this Pod number is. Do not pay attention to traffic, load, calculate this number, just perform.
+Runtime is also adjustable, but will only be valid for redeployment when set at DC level.
 
 ## Autoscaling
-A Pod-ok erőforrás igényei alapján automatikus skálázás is lehetséges.
+Automatic scaling is also possible based on the needs of the Pods resource.
 
-- A Pod-ok létrehozásakor meg lehet adni a szükséges resource szükségleteket (Requests).
-- Előbbi alapján már kalkulálható, hogy a Pod hol jöjjön létre (scheduling)
-- Limit-ek, felső korlátok is megadhatóak resource-onként Pod-okhoz (mennyi a becsült korlát)
+- When creating Pods, you can specify the required resource requirements (Requests).
+- Based on the former, we can calculate where the Pod is to be created (scheduling)
+- Limits, upper limits can be set as resource per Pod (how much is the estimated limit)
 
 https://www.youtube.com/watch?v=lk1IXYOs3WM
 
-# OpenShift hálózati kommunikáció
-A következő hálózati problémákra ad megoldást az OpenShift
-- Routing: hogyan érhetőek el kívülről az alkalmazásaink a PaaS-on
-- Összetartozó Docker containerek (Pod-ok) hogyan kommunikáljanak egymással
-- Újrainduló Pod-ok változó IP címeinek lekövetése.
-- Projekt izoláció - nem láthatják egymást különböző projektek különböző alkalmazásai
+# OpenShift network communication
+OpenShift solves the following network problems
+- Routing: how to access our applications on the PaaS from outside
+- Connecting Docker Containers (Pods) to communicate with each other
+- Tracking the changing IP addresses of rebooted Pods.
+- Project isolation - different applications of different projects cannot see each other
 
 ![networking](../common/images/openshift_arch.png)
+
+
 ## Routing
-A fő problémát az jelenti, hogy a különböző Node-okon létrejövő Pod-okban futó alkalmazást, hogyan lehet kívülről elérni, használni.
-A **Service** fogalom egy hálózati végpontot reprezentál, ez kívülről még nem érhető el. A Service egy "stabil" hálózati port (nem egy belső docker által osztott port), amelyen elérhető akár több POD által is nyújtott szolgáltatás (loadbalancer).
+The main problem is how the applications running in the Pods created on different Nodes can be accessed from outside.
+The **Service** concept represents a network endpoint that is not yet available from outside. Service is a "stable" network port (not a port shared by an internal docker) that can provide even more services (loadbalancer) provided by PODs.
 
 **Service**
 
-- A service nem kötődik konkrét POD-hoz(hiszen az dinamikusan változhat), hanem ún. selector-ral lehet POD-ok címkéire hivatkozni
-- Egy POD egy másik POD-dal Service-en keresztül kommunikálhat egy projekten belül.
-- A projekten belüli POD-ok konténereiben környezeti változók jönnek létre az egyes Service-ekhez: SVC_NAME_SERVICE_ADDRESS, _PORT
-- Az OpenShift belső DNS megoldása alapján is feldoldhatóak a Service-ek host nevei: SVC_NAME.PROJECT_NAME.svc.cluster.local
+- The service is not tied to a specific POD (as it can change dynamically), but a selector can be used to refer to POD labels
+- A POD can communicate with another POD via aService within a project.
+- Containers for PODs within the project create environment variables for each Service: SVC_NAME_SERVICE_ADDRESS, _PORT
+- OpenShift's internal DNS solution can also be used to resolve host host names: SVC_NAME.PROJECT_NAME.svc.cluster.local
 
-A kívülről elérhetőség problémáját az OpenShift úgy oldja meg, hogy egy Router komponens segítségével biztosít belépést a külső hívóknak.
+The problem of external availability is solved by OpenShift by providing access to external callers through a Router component.
 
-Az egyes Node-okra kerül egy Router, egy HAProxy, amely fogadja a hálózati forgalmat és megkeresi a megfelelő Service-ket, amelyek felé delegálnia kell. 
-Pl. a :80 -as porton érkező forgalmat a Router a "frontend" címkével rendelkező Service-ek felé irányítja, ahonnan már a megfelelő Pod-ok elérhetőek.
+Each Node is routed to a Router, an HAProxy that receives network traffic and finds the appropriate Services to which it needs to be delegated the traffic..
+For example, traffic from port 80 will be routed to Router to Services with the "frontend" tag, where the appropriate Pods are available.
 
-## Docker containerek közötti kommunikáció
-A Kubernetes oldja meg, hogy egy Pod kap egy belső IP címet, mintha egy különálló Host gép lenne. Ezen a "virtualizált" hoston futnak a Docker containerek így azok képesek kommunikálni egymással.
-Pod-ok egymással nem (így) kommunikálnak. Pod-ok más Pod-okkal Service-en keresztül kommunikálhatnak.
+## Communication between Docker Containers
+Kubernetes solves that a Pod gets an internal IP address as if it were a separate Host machine. On this "virtualized" host, the Docker containers run so they can communicate with each other.
+Pods do not communicate with each other. Pods can communicate with other Pods via Service.
 
 ## OpenShift SDN
 
 https://docs.openshift.com/enterprise/3.0/architecture/additional_concepts/sdn.html#architecture-additional-concepts-sdn
 
-- Open vSwitch alapú megoldás
-- Az OpenShift a Pod-okat egy cluster network-be szervezni (etcd-ben regisztrált alhálózatok): 10.1.0.0/16
-- Node-onként alhálózatok: 10.1.0.0/24, 10.1.1.0/24,... (256 db alhálózat)
-- VNID használat multitenant megoldásoknál
+- Open vSwitch-based solution
+- OpenShift organize Pods into a cluster network (subnets registered in etcd): 10.1.0.0/16
+- Node subnets: 10.1.0.0/24, 10.1.1.0/24, ... (256 subnets)
+- VNID used for multinational solutions
 
-A következő hálózati interfészeket hozza létre Node-onként:
-1. br0 - OVS bridge, a Pod-ok ehhez kapcsolódnak (veth párokkal)
-- tun0 - OVS port a br0-n az external network felé, Pod-ok default gateway (IP tables, NAT)
-- vovsbr - Docker containerek felé
-- vxlan0 - Internet felé, Remote container hozzáférésekhez
-2. lbr0 - Docker Bridge, a Docker containerek ehhez kapcsolódnak (veth)
--  vlinuxbr - Linux peer virtual Ethernet - Docker containerek eléréséhez
+Create the following network interfaces on all  Nodes:
+1. br0 - OVS bridge, pods connected to this (veth pairs)
+- tun0 - OVS port on br0 towards external network, Pods default gateway (IP tables, NAT)
+- vovsbr - towards Docker containers
+- vxlan0 - Towards the Internet for Remote Container Access
+2. lbr0 - Docker Bridge, Docker containers are connected (veth)
+- vlinuxbr - Linux for peer virtual Ethernet - accessing Docker containers
+
+
+Pod departure:
 
 ![networking2](../common/images/network.jpg)
 
 ![networking3](../common/images/network2.png)
-Pod indulása
 
-1. A Docker beköti a containert veth párral az lbr0-ba
-2. Az előbbi átkerül az OVS br0-ba
-3. OpenFlow route szabályok rögzítése az OVS DB-be
+1. Docker connects the container with veth to lbr0
+2. The former moves to OVS br0
+3. Loading OpenFlow route rules to OVS DB
 
-Példa hívási lánc: 
+Example Call Chain:
 
-1. A és B konténer egy hoston van: A(eth0,vethA)-B(eth0,vethB)
+1. A and B containers on the same host: A(eth0,vethA)-B(eth0,vethB)
 A->eth0->vethA->br0->vethB->eth0->B
-2. A és B konténer más hoston van: A(eth0,vethA)-B(eth0,vethB)
+2. A and B containers on different hosts: A(eth0,vethA)-B(eth0,vethB)
 A->eth0->vethA->br0->vxlan0->br0->vethB->eth0->B
-3. A és B konténer más hoston van, B pl. egy internetes cím: A(eth0,vethA)
+3. A and B containers on different hosts, B on the internet: A(eth0,vethA)
 A->eth0->vethA->br0->tun0->...->eth0->B
-
-
