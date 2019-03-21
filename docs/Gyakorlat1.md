@@ -1,91 +1,93 @@
-# Gyakorlat 1. - Docker
+# Practice 1. - Docker
 
-## Tudnivalók
-[Fontos információk](Tudnivalok.md)
-## Segédlet
-## Docker parancsok
-```shell
+## Learn more
+[Important information](Tudnivalok.md)
+## Help
+## Docker commands
+```Shell
 docker help
 docker CMD --help
 docker --debug CMD
 ```
-[Legfontosabb Docker parancsok](https://www.cheatography.com/tobix10/cheat-sheets/docker-commands/)
 
-## Hasznos linux parancsok
-```shell
+[Key Docker Commands](https://www.cheatography.com/tobix10/cheat-sheets/docker-commands/)
+
+## Useful linux commands
+```Shell
 brctl show
 ifconfig
 ip link show
 ```
 
-
 ### Nginx
-/usr/share/nginx/html alatt a főoldal
-/etc/init.d/nginx stop|start|restart|status paranccsal lehet leállítani
+/usr/share/nginx/html is the home page
+/etc/init.d/nginx stop|start|restart|status 
 
 ---
 
-## Feladat 1. - Docker alapműveletek 
-**Időtartam: ~15-30 perc**
+## Task 1. - Basic Docker Operations
+** Duration: ~ 15-30 minutes **
 
-### Célja, leírás
-Ennek a feladatnak a célja, hogy a legfontosabb Docker parancsokat megismerjétek. Ehhez a _docker help_ paranccsal mindent megtaláltok.
+### Purpose, description
+The purpose of this task is to get to know the most important Docker commands. To do this, use the _docker help_ command to find everything.
 
-1. Listázd az elérhető Docker parancsokat, ismerkedj meg a help-jével, hogy könnyen megtalálj majd mindent a későbbiekben. (exec, images, info, inspect, logs, ps, pull, run, search, ...)
-2. Nézd meg milyen image-ek vannak már lehúzva a helyi registry-be.
-3. Keress egy cirros image-et és húzd a local repoba (Ez egy lightweight linux).
-4. Indíts el egy az előbbi cirros image-ből készített container-t
-  * Lépj be rá egy terminálba /bin/sh shell-be és győződj meg róla, hogy valóban egy izolált containerben vagy! (docker run -it kapcsolóra keress rá akár neten!)
-  * Hasonlítsd össze a futó processzeket a containerben és a host gépen. (ps)
-5. Ellenőrizd a következőket a futó containerben:
-  * Mi a container host neve?
-  * Milyen nameserver van beállítva?
-  * Milyen hálózati interfészek vannak? 
-  * Mi a gateway? 
-  * Milyen IP-t kapott?   
-  * Milyen a routing table? (pl. netstat -nr)
-6. Fusson a cirros konténer és nyomozd ki, hogy a HOST gépen (tehát a VirtualBox-os image-en) melyik fájlban tárolódik a container "/etc/hostname" fájlja!
+1. List the available Docker commands, get to know your help command to find everything easily later. (exec, images, info, inspect, logs, ps, pull, run, search, ...)
+2. Look at what images have already been pulled into the local registry.
+3. Search for a cirros image and drag to the local repo (This is a lightweight linux).
+4. Launch a container made from the previous cirros image
+  * Enter into a terminal /bin/sh shell and make sure you are in an isolated container! (search for docker run -it on the net!)
+  * Compare running processes in the container and host machine. (ps)
+5. Check the following in the running container:
+  * What is the container host name?
+  * What nameserver is configured?
+  * What are the network interfaces?
+  * What is the gateway?
+  * What IP did you get?
+  * What is the routing table? (eg netstat -nr)
+6. Run the cirros container and find out in which file in the HOST machine (ie the VirtualBox image) is stored the container /etc/hostname file!
 
-_Hint: ezek a parancsok lesznek hasznotokra: docker search, docker pull, docker run -it, docker ps, netstat -nr, docker inspect stb._
-### Jegyzőkönyvhöz
-A jegyzőkönyvhöz másold ki egy text fájlba az utolsó pontra adott választ ill. hogy melyik docker paranccsal jöttél rá!
-
----
-
-## Feladat 2. - Docker www szerver
-**Időtartam: ~15 perc**
-
-### Célja, leírás
-Ennek a feladatnak a célja, hogy egy futó konténernek valahogy a hasznát is vegyük. 
-A feladat, hogy futtassatok Docker containerben egy web szervert. A host gépen megnyitva egy Firefoxot ezen az URL-en http://localhost írja ki, hogy Hello BME Paas labor! 80-as port ütközhet, ekkor válasszatok más portot.
-
-Javasolt web szerver: nginx (de lehet más is)
-A következőket biztosan meg kell oldani:
-
-1. A konténer belső portjának megnyitása a host felé (_docker run -P_)
-2. Figyeljétek meg a konténer státuszát! élettartamát! Ha megváltoztattok benne pl. egy index.html-et és leállítjátok, akkor egy új konténer indításánál nem lesz ott. Miért? El lehet-e indítani egy korábban módosított konténert (docker ps -a)?
-3. (Opcionális) Esetleg köteg becsatolással is megoldható (docker run -v ...).
-
-_Hint: ezek a parancsok lesznek hasznotokra: docker run -p, stb._
-### Jegyzőkönyvhöz
-A legfontosabb parancsokkal együtt egy 2-3 mondatos leírás legyen, hogy hogyan oldottátok meg.
+_Hint: these commands will be useful: docker search, docker pull, docker run, docker ps, netstat -nr, docker inspect, etc._
+### For Protocol
+Copy the answer to the last point in a text file to the report. which docker command you came with!
 
 ---
 
-## Feladat 3. - Docker hálózatok
-**Időtartam: ~15 perc**
 
-### Célja, leírás
-Futtassuk az előbbi konténert, ami kinyitja a 80-as portot és ellenőrizzük a hálózati működést.
+## Task 2. - Docker www server
+** Duration: ~ 15 minutes **
 
-1. Állítsd le az összes futó konténert.
-2. Ellenőrizd, listázd a host gépen, hogy milyen hálózati interfészek vannak.
-3. Indítsd el pl. az előbbi feladat konténerét úgy, hogy nyisson egy portot a hoston.
-4. Ellenőrizd, listázd a host gépen, hogy milyen hálózati interfészek vannak. Mi változott? 
-   - Ellenőrizd a bridge-ket is!
-5. Próbáld ki a docker network inspect parancsot. Figyeld meg, hogy milyen konténerek csatlakoznak a docker0 bridge-hez.
-   - Akár több konténert is indíthatsz és az előbbi pontokat megnézheted ismét.
+### Purpose, description
+The purpose of this task is to take advantage of a running container somehow.
+The task is to run a web server in Docker container. Opening a Firefox on the host machine at this URL http://localhost should tell you "Hello BME Paas lab!" You may found that port 80 busy, and then select a different port.
 
-_Hint: ezek a parancsok lesznek hasznotokra: docker network, brctl, ifconfig_
-### Jegyzőkönyvhöz
-A jegyzőkönyvben szereplő kérdést válaszold meg!
+Recommended web server: nginx (but can be different)
+The following must be resolved:
+
+1. Opening the inner port of the container to the host (_docker run -P_)
+2. Observe the status of the container! If you change it, e.g. an index.html file and shut down, will not be there when you start a new container. Why? Can I start a previously modified container (docker ps -a)?
+3. (Optional) Possibly solution with volume attachment (docker run -v ...).
+
+_Hint: these commands will be useful: docker run -p, etc._
+### For Protocol
+Along with the most important commands, there should be a 2-3 sentence description of how you resolved it.
+
+---
+
+## Task 3. - Docker Networks
+** Duration: ~ 15 minutes **
+
+### Purpose, description
+Run the previous container, which opens port 80 and checks the network operation.
+
+1. Stop all running containers.
+2. Check the list of hnetwork interfaces on the host machine.
+3. Start with  the container of the former task to open a port on the host.
+4. Check your host machine for a list of network interfaces. What has changed?
+   - Check the bridges too!
+5. Try the docker network inspect command. Notice what containers are connected to the docker0 bridge.
+   - You can even launch more containers and see the previous points again.
+
+_Hint: these commands will be useful: docker network, brctl, ifconfig_
+### For Protocol
+Answer the question in the minutes.
+
