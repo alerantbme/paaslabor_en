@@ -1,26 +1,25 @@
 # Docker
-## Konténerek
+## Containers
 - LXC, BSD Jails, Docker
-  - Chroot circa 1982,FreeBSD Jails circa 2000,Solaris Zones circa 2004, LXC circa 2008,Systemd-nspawn circa 2010-2013
-  - Docker circa 2013
-- Linux kernel technológiákra épülő izolált környezet
-- Izolált névterek (fs, net, ps, mount, ipc,...)
-- Kiforrott, gyors, biztonságos, optimális erőforrás használat
-- Példa konténer létrehozásra alap linux eszköztárral: https://ericchiang.github.io/post/containers-from-scratch/
-
+  - Chroot circa 1982, FreeBSD Jails circa 2000, Solaris Zones circa 2004, LXC circa 2008, Systemd-nspawn circa 2010-2013
+  - Docker circa 2013
+- An isolated environment based on Linux kernel technologies
+- Isolated namespaces (fs, net, ps, mount, ipc, ...)
+- Expanded, fast, secure, optimal resource usage
+- Example container creation with basic linux toolset: https://ericchiang.github.io/post/containers-from-scratch/
 
 ![containervsvm](../common/images/ContainerVsVM.jpg)
 
-## Alapfogalmak
-- Docker image: A linux root fájlrendszer módosításainak rendezett és rétegelt gyűjteménye. Nem módosítható. A futó konténerek alapja, tartalmaz minden információt, hogy egy konténer példányosítható legyen belőle.
-- Docker container: Egy image futásidejű példánya, egy izolált linux process hierarchia. Alapja egy Docker image, ami kiegészül futásidejű paraméterekkel, konfigurációkkal.
-- Docker registry: Image-ek gyűjtőhelye
-- Dockerfile: Parancsok, utasítások gyűjteménye. Egy alap image-en futtatva sorrendhelyesen az előbbi utasításokat egy új testreszabott image áll elő.  
+## Basic concepts
+- Docker image: Organized and layered collection of changes to the linux root file system. Cannot be modified. The basis of running containers includes all the information that a container can be copied from.
+- Docker container: A runtime copy of an image, an isolated linux process hierarchy. It is based on a Docker image that is complemented with runtime parameters and configurations.
+- Docker registry: Image collection 
+- Dockerfile: A collection of commands and instructions. Running on a basic image in order, a new customized image will appear in the order above.
 
 https://docs.docker.com/engine/reference/glossary
 ![images_containers](../common/images/docker_images_containers.png)
 
-## Docker architektúra
+## Docker architecture
 ![dockerlinux](../common/images/dockerarch.png)
 ![dockerarch](../common/images/architecture.jpg)
 
@@ -29,43 +28,43 @@ https://docs.docker.com/engine/reference/glossary
 
 https://xebia.com/blog/deep-dive-into-windows-server-containers-and-docker-part-2-underlying-implementation-of-windows-server-containers/
 
-## Rétegek
-- Az image-en végzett utasítások újabb és újabb rétegeket képeznek.
-- Egy image nem módosítható, a konténer példány is egy újabb rétegként jelenik meg.
-- A konténer példány tartosítható, image-be menthető.
+## Layers
+- The instructions executed on the image form new layers.
+- No image can be modified, the container instance also appears as a new layer.
+- Container instance can be stored, saved to image.
 ![containerlayers](../common/images/container-layers.jpg)
 
-## Perzisztens tárolók
-- A docker containerek nem perzisztensek, tehát leállítások esetén a tárolt adatok elvesz(het)nek
-- Perzisztens tár becsatolható a konténerekbe
+## Persistent Containers
+- The docker containers are not persistent, so the stored data will be lost (if any)
+- Persistent storage can be attached to containers
 ![sharedvolumes](../common/images/shared-volume.jpg)
 
-## Hálózat
-- A konténerek hálózatot tekintve is izoláltak lehetnek a hosttól (net namespace).
-- Egy konténer jellemzően egy hoston futtatott Linux Bridge-hez kapcsolódik (de számtalan féle hálózati architektúra kialakítása lehetséges).
-- A konténer explicit kinyithatja a hálózati portjait (port forward).
-- A konténerek összeköthetőek egymással.
+## Network
+- Containers can be isolated from the host (net namespace).
+Typically, a container is connected to a Linux Bridge that is run by a host (but it is possible to create many different network architectures).
+- The container can open ports explicitly (portforward)
+- Containers can be interconnected.
 
-## Legfontosabb parancsok
+## Key commands
 ```shell
-docker help                 --parancsok leírása
-docker image pull           --image letöltése
-docker image search         --image-ek keresése
-docker container run        --konténer példány indítása
-docker container run -v     --perzisztens köteg becsatolása
-docker container run -it    --interaktív terminál nyitása
-docker container run -d     --a konténer háttérfolyamatként futni fog
-docker container run -p     --port forward
-docker container ps|top     --futó konténerek
-docker container inspect    --konténer futás idejű paramétereinek a lekérdezése
-docker container start|stop --konténer indítása, leállítása
+docker help                     -- description of docker help commands
+docker image pull               -- image download
+docker image search             -- search for a docker image 
+docker container run            -- launch a container instance
+docker container run -v         -- mount  a persistent bundle
+docker container run -it        -- opening an interactive terminal
+docker container run -d         -- a container will run as a background process
+docker container run -p         -- port forward
+docker container ps | top       -- running containers
+docker container inspect        -- querying the runtime parameters of the container
+docker container start | stop   -- container start, stop
 ```
 
-## Docker ökoszisztéma
-- Docker Machine - Docker containerek futtatása virtuális gépeken
-- Docker Compose - Docker container stackek kezelése
-- Docker Swarm   - Docker container clusterezés
+## Docker ecosystem
+- Docker Machine - Run Docker Containers on virtual machines
+- Docker Compose - Docker container stack handling
+- Docker Swarm - Docker container clustering
 
 ## Docker GUI management
 _docker container run -d -p 9000:9000 --privileged -v/var/run/docker.sock:/var/run/docker.sock portainer/portainer_
-http://localhost:9000 (passwd megadás, majd local, connect és voilá, van egy GUI a lokális docker környezet fölé)
+http://localhost:9000 (specify passwd, then local, connect and voilá, there is a GUI above the local docker environment)
