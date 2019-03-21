@@ -1,48 +1,47 @@
-# Gyakorlat 2. - OpenShift áttekintés
 
-## Tudnivalók
-[Fontos információk](Tudnivalok.md)
+# Exercise 2. - OpenShift Overview
 
-**Fontos:**
-- Lokális OpenShift is használható a virtuális gépetekben!
-_sudo systemctl status openshift_ paranccsal ellenőrizd, hogy fut-e.
+## Learn more
+[Important information](Tudnivalok.md)
 
-- OpenShift konvenciók, ha a központi OpenShiftet használjátok:
-  - Felhasználónevetek legyen: studentxy - ahol x y a nevetek kezdőbetűi pl. studentnz (kisbetűk)
-  - Projektek nevei: gyakorlatNxy - N a gyakorlat száma, x, y lsd. előbb, pl. gyakorlat2nz (kisbetűk)
-- Mindenki a saját userét használja ezután, hogy izoláltan dolgozzatok!
+**Important:**
+- Local OpenShift can be used on your virtual machines!
+_sudo systemctl status openshift_ to see if it is running.
+
+- OpenShift Conventions if you use central OpenShift:
+  - Username: studentxy - where x y is the initials of your names eg studentnz (lowercase)
+  - Project names: practiceNxy - N number of practice, x, y lsd. first, eg practice2nz (lowercase)
+- Everyone uses your own user to work separately!
 
 
-## Telepített OpenShift áttekintése - vezetett bemutató
+## Installed OpenShift Overview - Leaded Tutorial
 ### Dashboard
-- Belépés/Kilépés
-- Új projekt létrehozása (projektnév egyedi!)
-  - Javascript példa kiválasztása, Node.js
-  - TryIt Git sample kiválasztása
-  - Advanced részek áttekintése
-- Build folyamat 
-- Deployment folyamat
+- Login / Exit
+- Create a new project (project name is unique!)
+  - Javascript example selection, Node.js
+  - Selecting TryIt Git sample
+  - Advanced Parts Overview
+- Build process
+- Deployment process
 - Deployment Config
-- Pod-ok (build és az alkalmazás)
+- Pods (build and app)
 
-_További dokumentáció: https://docs.openshift.org/latest/welcome/index.html_
-
-```shell
-oc login https://bmepaas-master.openshift.local:8443
-#vagy lokálisan:
-oc login -u system:admin
-oc project XXXX
-```
+_Further documentation: https://docs.openshift.org/latest/welcome/index.html_
 
 
-### oc CLI, fő komponensek
+
+
+
+
+### oc CLI, main components
 ```shell
  oc login https://bmepaas-master.openshift.local:8443    
-#vagy lokálisan:
+#or locally 
 oc login -u system:admin
 ```
 
-Node-ok:
+
+Nodes:
 ```shell
 oc get nodes
 NAME                             STATUS                     AGE
@@ -50,9 +49,9 @@ bmepaas-master.openshift.local   Ready,SchedulingDisabled   2d
 bmepaas-node1.openshift.local    Ready                      2d
 bmepaas-node2.openshift.local    Ready                      2d
 ```
-_A master-re nem kerülhet Pod (SchedulingDisabled)_
+_No pod to the master node (SchedulingDisabled)_
 
-Szolgáltatások:
+Services:
 ```shell
 oc get services
 NAME               CLUSTER-IP       EXTERNAL-IP   PORT(S)                   AGE
@@ -62,7 +61,7 @@ registry-console   172.30.8.163     <none>        9000/TCP                  2d
 router             172.30.117.243   <none>        80/TCP,443/TCP,1936/TCP   2d
 ```
 
-A "gyári" Pod-ok:
+Built in Pods:
 ```shell
 oc get pods
 NAME                       READY     STATUS    RESTARTS   AGE
@@ -79,9 +78,9 @@ router-1-wksfx             1/1       Running   1          2d
 
 ```
 
-## Segédlet
+## Help
 
-### A feladatokhoz szükséges CLI parancsok:
+### The CLI commands required for tasks:
 ```shell
 oc help
 oc login -u system:admin
@@ -92,23 +91,23 @@ oc describe
 oc new-app
 ```
 
-## Feladat 1. - PaaS minta alkalmazás telepítése
-**Időtartam: 30 perc**
+## Task 1. - Install PaaS Sample Application
+** Duration: 30 minutes **
 
-### Célja, leírás
-Ennek a feladatnak a célja, hogy kipróbáljátok a PaaS-t. Hozzatok létre a projekteteken belül egy minta alkalmazást (választhattok technológiát a dashboard-ról).
- 
-Javasolt minta: NodeJS vagy Java
-A következőkön haladjatok végig és a megjelölt adatokat gyűjtsétek be a jegyzőkönyvhöz:
+### Purpose, description
+The purpose of this task is to try out PaaS. Create a sample application within your projects (you can choose technology from the dashboard).
+ 
+Recommended sample: NodeJS or Java
+Go through the following and collect the marked data for the minutes:
 
-1. Hozzatok létre egy alkalmazást a saját useretekkel a Dashboardon. A kiválasztott Git projektet nézzétek át a github-os linkjén. Érdemes átnézni, megérteni, hogy mi is fog fordulni, települni.
-2. Kövesd a telepítési folyamatot. Build logokat érdemes megnézni.
-3. Ellenőrizd, hogy böngészőből eléred az alkalmazást és működik-e!
-4. A bemutató alapján nézd végig a Dashboard-on, hogy mik is jöttek létre, milyen információkat látsz.
-5. Ugyanígy nézd át az oc CLI -vel is a projektet, a POD-od, a service-t.
-6. Derítsd ki, hogy mi a container id-ja az alkalmazásnak, azaz milyen futó Docker container példányban fut az alkalmazás?
+1. Create an application with your own user account on the Dashboard. Check out the selected Git project on the github link. It is worth checking out, understanding what will compile and deploy.
+2. Follow the installation process. Build logs worth checking out.
+3. Check to see if the application is running from your browser and it works!
+4. Look at the Dashboard based on the tutorial to see what has been created, what information you have.
+5. Also look at the project, the POD, the service with oc CLI.
+6. Find out what the container id is for the application, ie what running Docker container is running in the application?
 
-_Hint: ezek a parancsok lesznek hasznotokra: oc new-app, oc get pods, oc get svc, oc describe pod stb._
+_Hint: these commands will be useful: oc new-app, oc get pods, oc get svc, oc describe pod etc.
 
-### Jegyzőkönyvhöz
-Írd le a 6. pont eredményét és azt, hogy hogyan derítetted ki.
+### For Protocol
+Write down the result of point 6 and how you discovered it.
