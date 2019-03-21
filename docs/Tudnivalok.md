@@ -45,7 +45,7 @@ Everyone must create a GitHub account or use an existing one!
 You can work in the ~/git directory in the CentOS image (there will be more projects)
 
 Git Important Commands:
-``Shell
+```Shell
 echo "# gyakorlat2" >> README.md
 git init
 git add README.md
@@ -55,8 +55,9 @@ git push -u origin master
 ```
 
 Here's how to clone examples in practice:
-``Shell
-Example # Cloning Java OpenShift Wildfly Application
+```Shell
+Example 
+# Cloning Java OpenShift Wildfly Application
 git clone https://github.com/bparees/openshift-jee-sample practice2
 git pull https://github.com/bparees/openshift-jee-sample practice2
 
@@ -68,11 +69,12 @@ git commit -a -m 'Some commit message'
 # upload to the new location under our own account
 git push origin master
 ```
+
 You can now create a new project on your own code base based on your own GitHub URL.
 
 Such is the directory structure:
 
-``Shell
+```Shell
 
 [bmepaasuser @ localhost ~] $ tree git /
 git/
@@ -91,7 +93,6 @@ git/
 
 ```
 
-
 ## DNS and hosts file
 - Openhift application core components are basically available with IP, but FQDNs are included in the /etc/hosts file
 - Dnsmasqd is also installed on the machines, which also works with wildcard DNA, eg. XXX.apps.openshift.local also resolves to the correct IP
@@ -99,7 +100,7 @@ git/
 dnsmasq config file: /etc/NetworkManager/dnsmasq.d
 
 ## IPs
-``Shell
+```Shell
 192.168.30.11 bmepaas-master.openshift.local
 192.168.30.12 bmepaas-node1.openshift.local
 192.168.30.13 bmepaas-node2.openshift.local
@@ -117,21 +118,26 @@ dnsmasq config file: /etc/NetworkManager/dnsmasq.d
 
 ## Solution Document
 
-** Collect materials for the report continuously, when, what you do, to have all the information at the time of filling. **
+**Collect materials for the report continuously, when, what you do, to have all the information at the time of filling.**
 
 # How can I try out at home?
 On Linux is a simpler, but other platforms also work!
+
 ## Virtual Machine
 You can also take with you the virtual machine that is used in practice!
+
 ## Docker
 - Install and play with it, on Linux via the package manager or [from](https://store.docker.com/search?offering=community&type=edition) 
 - Or play with [online](http://training.play-with-docker.com/)!
+
 ## Kubernetes
 - Native Kubernetes installation on Linux
 - [Minicube](https://github.com/kubernetes/minikube)
+
 ## Openshift
 - oc cluster up [here](https://www.okd.io/)
 - [Minishift](https://github.com/minishift/minishift)
+
 ## Openshift course
 - https://learn.openshift.com
 
