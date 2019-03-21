@@ -35,14 +35,14 @@ The aim of the lab is to review the following topics:
 ## Practice 1. - Docker
 [Practice is available here](docs/Gyakorlat1.md)
 ## Practice 2. - OpenShift basic operations, basic concepts in practice
-[Practice is available here](docs/Practice2.md)
+[Practice is available here](docs/Gyakorlat2.md)
 ## Practice 3. - OpenShift Application Installation - Presentation
-[Practice is available here](docs/Practice3.md)
+[Practice is available here](docs/Gyakorlat3.md)
 ## Practice 4. - OpenShift S2I deployment
-[Practice is available here](docs/Practice4.md)
+[Practice is available here](docs/Gyakorlat4.md)
 
 # Optional exercises - optional order
 ## Practice 5. - OpenShift Scaling Commands
-[Practice available here](docs/Practice5.md)
+[Practice available here](docs/Gyakorlat5.md)
 ## Practice 6. - Network
-[Practice is available here](docs/Practice6.md)
+[Practice is available here](docs/Gyakorlat6.md)
