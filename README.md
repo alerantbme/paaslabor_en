@@ -8,13 +8,13 @@ GitHub page: https://alerantbme.github.io/paaslabor_en/
 ---
 # Objective, theme
 The aim of the lab is to review the following topics:
-- ** Basic Operations with Applications Running in Containers **
+- **Basic Operations with Applications Running in Containers**
   - Create a Docker Container based on dockerfile or Docker Hub image
   - Using Docker Registry
   - examining the connection between the host and the container (process IDs, ports, namespaces),
   - run commands in the container
   - running, accessing, and modifying a web server.
-- ** OpenShift **
+- **OpenShift**
   - container orchestration,
   - deployment processes,
   - Overview of OpenShift architecture
@@ -30,6 +30,7 @@ If you would like to know Alerant's activities, visit our website: https://www.a
 
 ## Docker
 [Docker](docs/Elmelet2.md)
+
 ## OpenShift 
 [OpenShift](docs/Elmelet3.md)
 
