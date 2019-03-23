@@ -74,7 +74,6 @@ In addition, the build process can be customized at several points:
 2. Run script - How to run the generated result product.
 3. Save-Artifacts - You can save packages that are used during the build, so that you do not need to download all - unchanged dependencies for each build.
 
-## Legfontosabb CLI parancsok
 
 ## Installation process
 ![appflow1](../common/images/deploy_flow1.png)
@@ -96,8 +95,8 @@ The CLI can also be used with OAuth tokens.
 
 ## Key CLI commands
 ```shell
-oc help
-oc CMD --help
+oc help             
+oc CMD --help           
 oc types            --OpenShift basic entities
 oc login            --login
 oc new-app          --new app creation
