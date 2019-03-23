@@ -12,7 +12,12 @@ The report also contains test questions and solutions to be copied from the exer
 **Submit the solution to the end of the week of the lab (Sunday 23:59)**
 
 ---
+**Solution Report:** [here](https://docs.google.com/forms/d/1mqVqafDHqC-XM9sIPOGnN3Oo-EQGEnK0Tt2DUTNIpRA/edit
+)
+
 **Labor Evaluation:** [here](https://goo.gl/forms/xBh9tuN6bsIne56Z2)
+
+
 ---
 
 ---
