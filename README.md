@@ -43,11 +43,3 @@ The aim of the lab is to review the following topics:
 [Practice is available here](docs/Gyakorlat2.md)
 ## Practice 3. - OpenShift Application Installation - Presentation
 [Practice is available here](docs/Gyakorlat3.md)
-## Practice 4. - OpenShift S2I deployment
-[Practice is available here](docs/Gyakorlat4.md)
-
-# Optional exercises - optional order
-## Practice 5. - OpenShift Scaling Commands
-[Practice available here](docs/Gyakorlat5.md)
-## Practice 6. - Network
-[Practice is available here](docs/Gyakorlat6.md)
