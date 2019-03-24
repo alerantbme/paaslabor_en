@@ -7,10 +7,6 @@
 GitHub page: https://alerantbme.github.io/paaslabor_en/
 
 ---
-## Amennyiben előre szeretnél felkészülni, akkor a következők szerint javasolt a haladás:
-  - IaaS, PaaS közötti különbségek megértése
-  - Docker alapfogalmak áttekintése (container, container image, alap parancsok: exec, run, push, pull, search)
-  - Kubernetes alapfogalmak áttekintése: Pod, Controller, Node
 
 # Preliminary Preparation (Optional)
 - The purpose of theoretical materials is to review the topic, a collection of useful illustrations and links for understanding.
