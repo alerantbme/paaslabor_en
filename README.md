@@ -1,3 +1,4 @@
+
 ![alerantlogo](https://www.alerant.hu/img/logo.svg) 
 # BME PaaS   
 ## Information
@@ -5,6 +6,23 @@
 
 GitHub page: https://alerantbme.github.io/paaslabor_en/
 
+---
+## Amennyiben előre szeretnél felkészülni, akkor a következők szerint javasolt a haladás:
+  - IaaS, PaaS közötti különbségek megértése
+  - Docker alapfogalmak áttekintése (container, container image, alap parancsok: exec, run, push, pull, search)
+  - Kubernetes alapfogalmak áttekintése: Pod, Controller, Node
+
+# Preliminary Preparation (Optional)
+- The purpose of theoretical materials is to review the topic, a collection of useful illustrations and links for understanding.
+- It is not a goal to describe each topic in detail. These topics are much more documented in many places.
+- The following theoretical materials are presented in detail during the exercise.
+- There is no jump in or check, if you read ahead, the material will be better in your head at the end of the exercise.
+
+## If you want to prepare yourself, then progress is recommended as follows:
+  - Understanding the differences between IaaS and PaaS
+  - Overview of Docker concepts (container, container image, basic commands: exec, run, push, pull, search)
+  - Basic concepts of Kubernetes: Pod, Controller, Node
+    
 ---
 # Objective, theme
 The aim of the lab is to review the following topics:
