@@ -89,5 +89,5 @@ Run the previous container, which opens port 80 and checks the network operation
 
 _Hint: these commands will be useful: docker network, brctl, ifconfig_
 ### For the solution report
-Answer the question in the minutes.
+Answer the questions
 
