@@ -47,7 +47,7 @@ The purpose of this task is to get to know the most important Docker commands. T
 6. Run the cirros container and find out in which file in the HOST machine (ie the VirtualBox image) is stored the container /etc/hostname file!
 
 _Hint: these commands will be useful: docker search, docker pull, docker run, docker ps, netstat -nr, docker inspect, etc._
-### For Protocol
+### For the solution report
 Copy the answer to the last point in a text file to the report. which docker command you came with!
 
 ---
@@ -68,7 +68,7 @@ The following must be resolved:
 3. (Optional) Possibly solution with volume attachment (docker run -v ...).
 
 _Hint: these commands will be useful: docker run -p, etc._
-### For Protocol
+### For the solution report
 Along with the most important commands, there should be a 2-3 sentence description of how you resolved it.
 
 ---
@@ -88,6 +88,6 @@ Run the previous container, which opens port 80 and checks the network operation
    - You can even launch more containers and see the previous points again.
 
 _Hint: these commands will be useful: docker network, brctl, ifconfig_
-### For Protocol
+### For the solution report
 Answer the question in the minutes.
 
