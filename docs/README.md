@@ -39,17 +39,17 @@ If you would like to know Alerant's activities, visit our website: https://www.a
 
 # PaaS theory
 ## IaaS, PaaS, SaaS
-[IaaS, PaaS, SaaS](docs/Elmelet1.md)
+[IaaS, PaaS, SaaS](Elmelet1.md)
 
 ## Docker
-[Docker](docs/Elmelet2.md)
+[Docker](Elmelet2.md)
 
 ## OpenShift 
-[OpenShift](docs/Elmelet3.md)
+[OpenShift](Elmelet3.md)
 
 ---
 
 # Links
-[Link page](docs/Linkek.md)
+[Link page](Linkek.md)
 
 ---
