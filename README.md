@@ -3,7 +3,7 @@
 ## Learn more
 **Labor email contact:** alerant.bme.paas.labor@gmail.com
 
-[Learn more here](docs/Knowledge.md)
+[Learn more here](docs/Tudnivalok.md)
 
 ## Solution
 The rating is based on the following Google Forms document, please fill in and send it with your  email address.
