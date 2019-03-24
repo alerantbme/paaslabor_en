@@ -1,9 +1,11 @@
 ![Alerantlogo](https://www.alerant.hu/img/logo.svg)
 # BME PaaS in English
 ## Learn more
-**Labor email contact:** alerant.bme.paas.labor@gmail.com
 
+**Labor email contact:** alerant.bme.paas.labor@gmail.com
+---
 **Learn more** [here](docs/Tudnivalok.md)
+---
 
 ## Solution
 The rating is based on the following Google Forms document, please fill in and send it with your  email address.
@@ -13,9 +15,9 @@ The report also contains test questions and solutions to be copied from the exer
 
 ---
 **Solution Report:** [here](https://docs.google.com/forms/d/e/1FAIpQLScBZvVxk4YBLK4rNpDLmailXvH94WrWFZrmSd_79YNCrVsgHA/viewform?usp=sf_link)
-
+---
 **Labor Evaluation:** [here](https://docs.google.com/forms/d/e/1FAIpQLSe-DAhaU2S1IrZKBChSlLnq-IvkD1veEQGi_yx0zLQhYkh40w/viewform?usp=sf_link)
-
+---
 
 ---
 
